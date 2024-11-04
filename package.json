@@ -1,9 +1,9 @@
 {
   "name": "eigenlayer",
   "devDependencies": {
-    "husky": "^8.0.3",
     "@commitlint/cli": "^18.2.0",
-    "@commitlint/config-conventional": "^18.1.0"
+    "@commitlint/config-conventional": "^18.1.0",
+    "husky": "^8.0.3"
   },
   "version": "2.0.0",
   "description": "NPM package for core contracts of Eigen Layer",
@@ -28,5 +28,8 @@
   "bugs": {
     "url": "https://github.com/KENILSHAHH/eigenlayer/issues"
   },
-  "homepage": "https://github.com/KENILSHAHH/eigenlayer#readme"
+  "homepage": "https://github.com/KENILSHAHH/eigenlayer#readme",
+  "dependencies": {
+    "eigenlayer-contracts": "^1.0.0"
+  }
 }
