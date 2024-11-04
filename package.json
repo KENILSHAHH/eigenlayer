@@ -5,7 +5,7 @@
     "@commitlint/cli": "^18.2.0",
     "@commitlint/config-conventional": "^18.1.0"
   },
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "NPM package for core contracts of Eigen Layer",
   "main": "package.json",
   "directories": {
