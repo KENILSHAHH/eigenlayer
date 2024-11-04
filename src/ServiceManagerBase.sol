@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: BUSL-1.1
 pragma solidity ^0.8.12;
 
-import {Initializable} from "@openzeppelin-upgrades/contracts/proxy/utils/Initializable.sol";
+import {Initializable} from "openzeppelin-upgrades/contracts/proxy/utils/Initializable.sol";
 import {ISignatureUtils} from "eigenlayer-contracts/src/contracts/interfaces/ISignatureUtils.sol";
 import {IAVSDirectory} from "eigenlayer-contracts/src/contracts/interfaces/IAVSDirectory.sol";
 import {IRewardsCoordinator} from "eigenlayer-contracts/src/contracts/interfaces/IRewardsCoordinator.sol";
@@ -72,7 +72,9 @@ abstract contract ServiceManagerBase is ServiceManagerBaseStorage {
      * @param _metadataURI is the metadata URI for the AVS
      * @dev only callable by the owner
      */
-    function updateAVSMetadataURI(string memory _metadataURI) public virtual onlyOwner {
+    function updateAVSMetadataURI(
+        string memory _metadataURI
+    ) public virtual onlyOwner {
         _avsDirectory.updateAVSMetadataURI(_metadataURI);
     }
 
@@ -87,19 +89,24 @@ abstract contract ServiceManagerBase is ServiceManagerBaseStorage {
      * @dev This function will revert if the `rewardsSubmission` is malformed,
      * e.g. if the `strategies` and `weights` arrays are of non-equal lengths
      */
-    function createAVSRewardsSubmission(IRewardsCoordinator.RewardsSubmission[] calldata rewardsSubmissions)
-        public
-        virtual
-        onlyRewardsInitiator
-    {
+    function createAVSRewardsSubmission(
+        IRewardsCoordinator.RewardsSubmission[] calldata rewardsSubmissions
+    ) public virtual onlyRewardsInitiator {
         for (uint256 i = 0; i < rewardsSubmissions.length; ++i) {
             // transfer token to ServiceManager and approve RewardsCoordinator to transfer again
             // in createAVSRewardsSubmission() call
-            rewardsSubmissions[i].token.transferFrom(msg.sender, address(this), rewardsSubmissions[i].amount);
-            uint256 allowance =
-                rewardsSubmissions[i].token.allowance(address(this), address(_rewardsCoordinator));
+            rewardsSubmissions[i].token.transferFrom(
+                msg.sender,
+                address(this),
+                rewardsSubmissions[i].amount
+            );
+            uint256 allowance = rewardsSubmissions[i].token.allowance(
+                address(this),
+                address(_rewardsCoordinator)
+            );
             rewardsSubmissions[i].token.approve(
-                address(_rewardsCoordinator), rewardsSubmissions[i].amount + allowance
+                address(_rewardsCoordinator),
+                rewardsSubmissions[i].amount + allowance
             );
         }
 
@@ -122,7 +129,9 @@ abstract contract ServiceManagerBase is ServiceManagerBaseStorage {
      * @notice Forwards a call to EigenLayer's AVSDirectory contract to confirm operator deregistration from the AVS
      * @param operator The address of the operator to deregister.
      */
-    function deregisterOperatorFromAVS(address operator) public virtual onlyRegistryCoordinator {
+    function deregisterOperatorFromAVS(
+        address operator
+    ) public virtual onlyRegistryCoordinator {
         _avsDirectory.deregisterOperatorFromAVS(operator);
     }
 
@@ -131,7 +140,9 @@ abstract contract ServiceManagerBase is ServiceManagerBaseStorage {
      * @param newRewardsInitiator The new rewards initiator address
      * @dev only callable by the owner
      */
-    function setRewardsInitiator(address newRewardsInitiator) external onlyOwner {
+    function setRewardsInitiator(
+        address newRewardsInitiator
+    ) external onlyOwner {
         _setRewardsInitiator(newRewardsInitiator);
     }
 
@@ -146,7 +157,11 @@ abstract contract ServiceManagerBase is ServiceManagerBaseStorage {
      * @dev No guarantee is made on uniqueness of each element in the returned array.
      *      The off-chain service should do that validation separately
      */
-    function getRestakeableStrategies() external view returns (address[] memory) {
+    function getRestakeableStrategies()
+        external
+        view
+        returns (address[] memory)
+    {
         uint256 quorumCount = _registryCoordinator.quorumCount();
 
         if (quorumCount == 0) {
@@ -161,10 +176,13 @@ abstract contract ServiceManagerBase is ServiceManagerBaseStorage {
         address[] memory restakedStrategies = new address[](strategyCount);
         uint256 index = 0;
         for (uint256 i = 0; i < _registryCoordinator.quorumCount(); i++) {
-            uint256 strategyParamsLength = _stakeRegistry.strategyParamsLength(uint8(i));
+            uint256 strategyParamsLength = _stakeRegistry.strategyParamsLength(
+                uint8(i)
+            );
             for (uint256 j = 0; j < strategyParamsLength; j++) {
-                restakedStrategies[index] =
-                    address(_stakeRegistry.strategyParamsByIndex(uint8(i), j).strategy);
+                restakedStrategies[index] = address(
+                    _stakeRegistry.strategyParamsByIndex(uint8(i), j).strategy
+                );
                 index++;
             }
         }
@@ -178,23 +196,27 @@ abstract contract ServiceManagerBase is ServiceManagerBaseStorage {
      * @dev No guarantee is made on whether the operator has shares for a strategy in a quorum or uniqueness
      *      of each element in the returned array. The off-chain service should do that validation separately
      */
-    function getOperatorRestakedStrategies(address operator)
-        external
-        view
-        returns (address[] memory)
-    {
+    function getOperatorRestakedStrategies(
+        address operator
+    ) external view returns (address[] memory) {
         bytes32 operatorId = _registryCoordinator.getOperatorId(operator);
-        uint192 operatorBitmap = _registryCoordinator.getCurrentQuorumBitmap(operatorId);
+        uint192 operatorBitmap = _registryCoordinator.getCurrentQuorumBitmap(
+            operatorId
+        );
 
         if (operatorBitmap == 0 || _registryCoordinator.quorumCount() == 0) {
             return new address[](0);
         }
 
         // Get number of strategies for each quorum in operator bitmap
-        bytes memory operatorRestakedQuorums = BitmapUtils.bitmapToBytesArray(operatorBitmap);
+        bytes memory operatorRestakedQuorums = BitmapUtils.bitmapToBytesArray(
+            operatorBitmap
+        );
         uint256 strategyCount;
         for (uint256 i = 0; i < operatorRestakedQuorums.length; i++) {
-            strategyCount += _stakeRegistry.strategyParamsLength(uint8(operatorRestakedQuorums[i]));
+            strategyCount += _stakeRegistry.strategyParamsLength(
+                uint8(operatorRestakedQuorums[i])
+            );
         }
 
         // Get strategies for each quorum in operator bitmap
@@ -202,10 +224,13 @@ abstract contract ServiceManagerBase is ServiceManagerBaseStorage {
         uint256 index = 0;
         for (uint256 i = 0; i < operatorRestakedQuorums.length; i++) {
             uint8 quorum = uint8(operatorRestakedQuorums[i]);
-            uint256 strategyParamsLength = _stakeRegistry.strategyParamsLength(quorum);
+            uint256 strategyParamsLength = _stakeRegistry.strategyParamsLength(
+                quorum
+            );
             for (uint256 j = 0; j < strategyParamsLength; j++) {
-                restakedStrategies[index] =
-                    address(_stakeRegistry.strategyParamsByIndex(quorum, j).strategy);
+                restakedStrategies[index] = address(
+                    _stakeRegistry.strategyParamsByIndex(quorum, j).strategy
+                );
                 index++;
             }
         }

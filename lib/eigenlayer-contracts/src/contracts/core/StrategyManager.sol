@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: BUSL-1.1
 pragma solidity ^0.8.12;
 
-import "@openzeppelin-upgrades/contracts/proxy/utils/Initializable.sol";
-import "@openzeppelin-upgrades/contracts/access/OwnableUpgradeable.sol";
-import "@openzeppelin-upgrades/contracts/security/ReentrancyGuardUpgradeable.sol";
+import "openzeppelin-upgrades/contracts/proxy/utils/Initializable.sol";
+import "openzeppelin-upgrades/contracts/access/OwnableUpgradeable.sol";
+import "openzeppelin-upgrades/contracts/security/ReentrancyGuardUpgradeable.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "../interfaces/IEigenPodManager.sol";
 import "../permissions/Pausable.sol";
@@ -36,7 +36,8 @@ contract StrategyManager is
 
     modifier onlyStrategyWhitelister() {
         require(
-            msg.sender == strategyWhitelister, "StrategyManager.onlyStrategyWhitelister: not the strategyWhitelister"
+            msg.sender == strategyWhitelister,
+            "StrategyManager.onlyStrategyWhitelister: not the strategyWhitelister"
         );
         _;
     }
@@ -223,7 +224,7 @@ contract StrategyManager is
             "StrategyManager.addStrategiesToDepositWhitelist: array lengths do not match"
         );
         uint256 strategiesToWhitelistLength = strategiesToWhitelist.length;
-        for (uint256 i = 0; i < strategiesToWhitelistLength;) {
+        for (uint256 i = 0; i < strategiesToWhitelistLength; ) {
             // change storage and emit event only if strategy is not already in whitelist
             if (!strategyIsWhitelistedForDeposit[strategiesToWhitelist[i]]) {
                 strategyIsWhitelistedForDeposit[strategiesToWhitelist[i]] = true;
@@ -240,12 +241,11 @@ contract StrategyManager is
      * @notice Owner-only function that removes the provided Strategies from the 'whitelist' of strategies that stakers can deposit into
      * @param strategiesToRemoveFromWhitelist Strategies that will be removed to the `strategyIsWhitelistedForDeposit` mapping (if they are in it)
      */
-    function removeStrategiesFromDepositWhitelist(IStrategy[] calldata strategiesToRemoveFromWhitelist)
-        external
-        onlyStrategyWhitelister
-    {
+    function removeStrategiesFromDepositWhitelist(
+        IStrategy[] calldata strategiesToRemoveFromWhitelist
+    ) external onlyStrategyWhitelister {
         uint256 strategiesToRemoveFromWhitelistLength = strategiesToRemoveFromWhitelist.length;
-        for (uint256 i = 0; i < strategiesToRemoveFromWhitelistLength;) {
+        for (uint256 i = 0; i < strategiesToRemoveFromWhitelistLength; ) {
             // change storage and emit event only if strategy is already in whitelist
             if (strategyIsWhitelistedForDeposit[strategiesToRemoveFromWhitelist[i]]) {
                 strategyIsWhitelistedForDeposit[strategiesToRemoveFromWhitelist[i]] = false;
@@ -365,7 +365,7 @@ contract StrategyManager is
         //loop through all of the strategies, find the right one, then replace
         uint256 stratsLength = stakerStrategyList[staker].length;
         uint256 j = 0;
-        for (; j < stratsLength;) {
+        for (; j < stratsLength; ) {
             if (stakerStrategyList[staker][j] == strategy) {
                 //replace the strategy with the last strategy in the list
                 stakerStrategyList[staker][j] = stakerStrategyList[staker][stakerStrategyList[staker].length - 1];
@@ -411,7 +411,7 @@ contract StrategyManager is
         uint256 strategiesLength = stakerStrategyList[staker].length;
         uint256[] memory shares = new uint256[](strategiesLength);
 
-        for (uint256 i = 0; i < strategiesLength;) {
+        for (uint256 i = 0; i < strategiesLength; ) {
             shares[i] = stakerStrategyShares[staker][stakerStrategyList[staker][i]];
             unchecked {
                 ++i;

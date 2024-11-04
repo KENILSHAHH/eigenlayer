@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: BUSL-1.1
 pragma solidity ^0.8.12;
 
-import "@openzeppelin-upgrades/contracts/proxy/utils/Initializable.sol";
-import "@openzeppelin-upgrades/contracts/access/OwnableUpgradeable.sol";
-import "@openzeppelin-upgrades/contracts/security/ReentrancyGuardUpgradeable.sol";
+import "openzeppelin-upgrades/contracts/proxy/utils/Initializable.sol";
+import "openzeppelin-upgrades/contracts/access/OwnableUpgradeable.sol";
+import "openzeppelin-upgrades/contracts/security/ReentrancyGuardUpgradeable.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "../libraries/Merkle.sol";
 import "../permissions/Pausable.sol";
@@ -126,11 +126,9 @@ contract RewardsCoordinator is
      * @dev This function will revert if the `rewardsSubmission` is malformed,
      * e.g. if the `strategies` and `weights` arrays are of non-equal lengths
      */
-    function createAVSRewardsSubmission(RewardsSubmission[] calldata rewardsSubmissions)
-        external
-        onlyWhenNotPaused(PAUSED_AVS_REWARDS_SUBMISSION)
-        nonReentrant
-    {
+    function createAVSRewardsSubmission(
+        RewardsSubmission[] calldata rewardsSubmissions
+    ) external onlyWhenNotPaused(PAUSED_AVS_REWARDS_SUBMISSION) nonReentrant {
         for (uint256 i = 0; i < rewardsSubmissions.length; i++) {
             RewardsSubmission calldata rewardsSubmission = rewardsSubmissions[i];
             uint256 nonce = submissionNonce[msg.sender];
@@ -152,12 +150,9 @@ contract RewardsCoordinator is
      * a permissioned call based on isRewardsForAllSubmitter mapping.
      * @param rewardsSubmissions The rewards submissions being created
      */
-    function createRewardsForAllSubmission(RewardsSubmission[] calldata rewardsSubmissions)
-        external
-        onlyWhenNotPaused(PAUSED_REWARDS_FOR_ALL_SUBMISSION)
-        onlyRewardsForAllSubmitter
-        nonReentrant
-    {
+    function createRewardsForAllSubmission(
+        RewardsSubmission[] calldata rewardsSubmissions
+    ) external onlyWhenNotPaused(PAUSED_REWARDS_FOR_ALL_SUBMISSION) onlyRewardsForAllSubmitter nonReentrant {
         for (uint256 i = 0; i < rewardsSubmissions.length; i++) {
             RewardsSubmission calldata rewardsSubmission = rewardsSubmissions[i];
             uint256 nonce = submissionNonce[msg.sender];
@@ -344,8 +339,8 @@ contract RewardsCoordinator is
             "RewardsCoordinator._validateRewardsSubmission: startTimestamp must be a multiple of CALCULATION_INTERVAL_SECONDS"
         );
         require(
-            block.timestamp - MAX_RETROACTIVE_LENGTH <= rewardsSubmission.startTimestamp
-                && GENESIS_REWARDS_TIMESTAMP <= rewardsSubmission.startTimestamp,
+            block.timestamp - MAX_RETROACTIVE_LENGTH <= rewardsSubmission.startTimestamp &&
+                GENESIS_REWARDS_TIMESTAMP <= rewardsSubmission.startTimestamp,
             "RewardsCoordinator._validateRewardsSubmission: startTimestamp too far in the past"
         );
         require(
@@ -459,9 +454,9 @@ contract RewardsCoordinator is
         // forgefmt: disable-next-item
         require(
             Merkle.verifyInclusionKeccak({
-                root: root, 
-                index: earnerLeafIndex, 
-                proof: earnerProof, 
+                root: root,
+                index: earnerLeafIndex,
+                proof: earnerProof,
                 leaf: earnerLeafHash
             }),
             "RewardsCoordinator._verifyEarnerClaimProof: invalid earner claim proof"

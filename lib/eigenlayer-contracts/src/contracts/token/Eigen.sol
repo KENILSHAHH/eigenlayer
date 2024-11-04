@@ -2,8 +2,8 @@
 pragma solidity ^0.8.12;
 
 import "@openzeppelin-v4.9.0/contracts/token/ERC20/IERC20.sol";
-import "@openzeppelin-upgrades-v4.9.0/contracts/token/ERC20/extensions/ERC20VotesUpgradeable.sol";
-import "@openzeppelin-upgrades-v4.9.0/contracts/access/OwnableUpgradeable.sol";
+import "openzeppelin-upgrades-v4.9.0/contracts/token/ERC20/extensions/ERC20VotesUpgradeable.sol";
+import "openzeppelin-upgrades-v4.9.0/contracts/access/OwnableUpgradeable.sol";
 
 contract Eigen is OwnableUpgradeable, ERC20VotesUpgradeable {
     /// CONSTANTS & IMMUTABLES
@@ -155,7 +155,11 @@ contract Eigen is OwnableUpgradeable, ERC20VotesUpgradeable {
         if (block.timestamp <= transferRestrictionsDisabledAfter) {
             // if both from and to are not whitelisted
             require(
-                from == address(0) || from == address(this) || to == address(this) || allowedFrom[from] || allowedTo[to],
+                from == address(0) ||
+                    from == address(this) ||
+                    to == address(this) ||
+                    allowedFrom[from] ||
+                    allowedTo[to],
                 "Eigen._beforeTokenTransfer: from or to must be whitelisted"
             );
         }

@@ -4,7 +4,7 @@ pragma solidity ^0.8.12;
 import {ISignatureUtils} from "eigenlayer-contracts/src/contracts/interfaces/ISignatureUtils.sol";
 import {ECDSAStakeRegistryPermissioned} from "./ECDSAStakeRegistryPermissioned.sol";
 import {IDelegationManager} from "eigenlayer-contracts/src/contracts/interfaces/IDelegationManager.sol";
-import {CheckpointsUpgradeable} from "@openzeppelin-upgrades/contracts/utils/CheckpointsUpgradeable.sol";
+import {CheckpointsUpgradeable} from "openzeppelin-upgrades/contracts/utils/CheckpointsUpgradeable.sol";
 
 /// @title ECDSA Stake Registry with Equal Weight
 /// @dev THIS CONTRACT IS NOT AUDITED
@@ -25,7 +25,9 @@ contract ECDSAStakeRegistryEqualWeight is ECDSAStakeRegistryPermissioned {
     /// @dev Overrides the _updateOperatorWeight function from the parent class to implement equal weighting.
     ///      Emits an OperatorWeightUpdated event upon successful update.
     /// @param _operator The address of the operator whose weight is being updated.
-    function _updateOperatorWeight(address _operator) internal override returns (int256){
+    function _updateOperatorWeight(
+        address _operator
+    ) internal override returns (int256) {
         uint256 oldWeight;
         uint256 newWeight;
         int256 delta;

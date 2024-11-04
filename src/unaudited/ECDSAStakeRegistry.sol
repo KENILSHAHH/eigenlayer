@@ -7,10 +7,10 @@ import {IDelegationManager} from "eigenlayer-contracts/src/contracts/interfaces/
 import {ISignatureUtils} from "eigenlayer-contracts/src/contracts/interfaces/ISignatureUtils.sol";
 import {IServiceManager} from "../interfaces/IServiceManager.sol";
 
-import {OwnableUpgradeable} from "@openzeppelin-upgrades/contracts/access/OwnableUpgradeable.sol";
-import {CheckpointsUpgradeable} from "@openzeppelin-upgrades/contracts/utils/CheckpointsUpgradeable.sol";
-import {SignatureCheckerUpgradeable} from "@openzeppelin-upgrades/contracts/utils/cryptography/SignatureCheckerUpgradeable.sol";
-import {IERC1271Upgradeable} from "@openzeppelin-upgrades/contracts/interfaces/IERC1271Upgradeable.sol";
+import {OwnableUpgradeable} from "openzeppelin-upgrades/contracts/access/OwnableUpgradeable.sol";
+import {CheckpointsUpgradeable} from "openzeppelin-upgrades/contracts/utils/CheckpointsUpgradeable.sol";
+import {SignatureCheckerUpgradeable} from "openzeppelin-upgrades/contracts/utils/cryptography/SignatureCheckerUpgradeable.sol";
+import {IERC1271Upgradeable} from "openzeppelin-upgrades/contracts/interfaces/IERC1271Upgradeable.sol";
 
 /// @title ECDSA Stake Registry
 /// @dev THIS CONTRACT IS NOT AUDITED

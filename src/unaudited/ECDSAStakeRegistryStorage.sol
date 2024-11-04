@@ -2,7 +2,7 @@
 pragma solidity ^0.8.12;
 
 import {IDelegationManager} from "eigenlayer-contracts/src/contracts/interfaces/IDelegationManager.sol";
-import {CheckpointsUpgradeable} from "@openzeppelin-upgrades/contracts/utils/CheckpointsUpgradeable.sol";
+import {CheckpointsUpgradeable} from "openzeppelin-upgrades/contracts/utils/CheckpointsUpgradeable.sol";
 import {ECDSAStakeRegistryEventsAndErrors, Quorum, StrategyParams} from "../interfaces/IECDSAStakeRegistryEventsAndErrors.sol";
 
 abstract contract ECDSAStakeRegistryStorage is
