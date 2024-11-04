@@ -15,9 +15,9 @@ Let's start with a small ERC20 contract, that we bootstrapped using the https://
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
-import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
+import "openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
+import "openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+import "openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 
 contract MyToken is Initializable, ERC20Upgradeable, UUPSUpgradeable {
     address public owner;
@@ -57,8 +57,8 @@ For example, we could have our token on xDai, with our governor on mainnet, or w
 In order to do that, we will start by adding xref:api:crosschain.adoc#CrossChainEnabled[`CrossChainEnabled`] to our contract. You will notice that the contract is now abstract. This is because `CrossChainEnabled` is an abstract contract: it is not tied to any particular chain and it deals with cross-chain interactions in an abstract way. This is what enables us to easily reuse the code for different chains. We will specialize it later by inheriting from a chain-specific implementation of the abstraction.
 
 ```diff
- import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
-+import "@openzeppelin/contracts-upgradeable/crosschain/CrossChainEnabled.sol";
+ import "openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
++import "openzeppelin/contracts-upgradeable/crosschain/CrossChainEnabled.sol";
 
 -contract MyToken is Initializable, ERC20Upgradeable, UUPSUpgradeable {
 +abstract contract MyTokenCrossChain is Initializable, ERC20Upgradeable, UUPSUpgradeable, CrossChainEnabled {
@@ -88,7 +88,7 @@ For example, if our token is on xDai, and our governor on mainnet, we can use th
 ----
 [...]
 
-import "@openzeppelin/contracts-upgradeable/crosschain/amb/CrossChainEnabledAMB.sol";
+import "openzeppelin/contracts-upgradeable/crosschain/amb/CrossChainEnabledAMB.sol";
 
 contract MyTokenXDAI is
     MyTokenCrossChain,
@@ -102,7 +102,7 @@ If the token is on Ethereum mainnet, and our governor on Optimism, we use the Op
 ----
 [...]
 
-import "@openzeppelin/contracts-upgradeable/crosschain/optimismCrossChainEnabledOptimism.sol";
+import "openzeppelin/contracts-upgradeable/crosschain/optimismCrossChainEnabledOptimism.sol";
 
 contract MyTokenOptimism is
     MyTokenCrossChain,
@@ -128,9 +128,9 @@ In the case of the `mint` function, the caller must have the `MINTER_ROLE` when 
 
 
 ```diff
- import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
- import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
-+import "@openzeppelin/contracts-upgradeable/access/AccessControlCrossChainUpgradeable.sol";
+ import "openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
+ import "openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
++import "openzeppelin/contracts-upgradeable/access/AccessControlCrossChainUpgradeable.sol";
 
 -abstract contract MyTokenCrossChain is Initializable, ERC20Upgradeable, UUPSUpgradeable, CrossChainEnabled {
 +abstract contract MyTokenCrossChain is Initializable, ERC20Upgradeable, UUPSUpgradeable, AccessControlCrossChainUpgradeable {
@@ -166,10 +166,10 @@ This results in the following, final, code:
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/access/AccessControlCrossChainUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
-import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
+import "openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
+import "openzeppelin/contracts-upgradeable/access/AccessControlCrossChainUpgradeable.sol";
+import "openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+import "openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 
 abstract contract MyTokenCrossChain is Initializable, ERC20Upgradeable, AccessControlCrossChainUpgradeable, UUPSUpgradeable {
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
@@ -194,14 +194,14 @@ abstract contract MyTokenCrossChain is Initializable, ERC20Upgradeable, AccessCo
     }
 }
 
-import "@openzeppelin/contracts-upgradeable/crosschain/amb/CrossChainEnabledAMB.sol";
+import "openzeppelin/contracts-upgradeable/crosschain/amb/CrossChainEnabledAMB.sol";
 
 contract MyTokenXDAI is
     MyTokenCrossChain,
     CrossChainEnabledAMB(0x75Df5AF045d91108662D8080fD1FEFAd6aA0bb59)
 {}
 
-import "@openzeppelin/contracts-upgradeable/crosschain/optimismCrossChainEnabledOptimism.sol";
+import "openzeppelin/contracts-upgradeable/crosschain/optimismCrossChainEnabledOptimism.sol";
 
 contract MyTokenOptimism is
     MyTokenCrossChain,

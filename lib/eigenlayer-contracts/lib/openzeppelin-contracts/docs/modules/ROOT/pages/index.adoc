@@ -12,7 +12,7 @@
 === Installation
 
 ```console
-$ npm install @openzeppelin/contracts
+$ npm install openzeppelin/contracts
 ```
 
 OpenZeppelin Contracts features a xref:releases-stability.adoc#api-stability[stable API], which means your contracts won't break unexpectedly when upgrading to a newer minor version.
@@ -28,7 +28,7 @@ Once installed, you can use the contracts in the library by importing them:
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 contract MyNFT is ERC721 {
     constructor() ERC721("MyNFT", "MNFT") {

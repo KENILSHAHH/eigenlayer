@@ -13,7 +13,7 @@ All draft contracts were either moved into a different directory or removed from
 Removed contracts are still available on the v2.5 release of OpenZeppelin Contracts, which you can install by running:
 
 ```console
-$ npm install @openzeppelin/contracts@v2.5
+$ npm install openzeppelin/contracts@v2.5
 ```
 
 Refer to the xref:2.x@contracts:api:drafts.adoc[v2.x documentation] when working with them.

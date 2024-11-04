@@ -169,7 +169,7 @@ It is no longer possible to call an `initializer`-protected function from within
 
  * `ERC20FlashMint` is no longer a Draft ERC. ([#2673](https://github.com/OpenZeppelin/openzeppelin-contracts/pull/2673)))
 
-**How to update:** Change your import paths by removing the `draft-` prefix from `@openzeppelin/contracts/token/ERC20/extensions/draft-ERC20FlashMint.sol`.
+**How to update:** Change your import paths by removing the `draft-` prefix from `openzeppelin/contracts/token/ERC20/extensions/draft-ERC20FlashMint.sol`.
 
 > See [Releases and Stability: Drafts](https://docs.openzeppelin.com/contracts/4.x/releases-stability#drafts).
 

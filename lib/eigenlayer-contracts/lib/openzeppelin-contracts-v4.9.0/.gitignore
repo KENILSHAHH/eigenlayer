@@ -44,7 +44,7 @@ build/
 # docs artifacts
 docs/modules/api
 
-# only used to package @openzeppelin/contracts
+# only used to package openzeppelin/contracts
 contracts/build/
 contracts/README.md
 

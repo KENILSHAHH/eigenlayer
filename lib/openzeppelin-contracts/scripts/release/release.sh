@@ -38,13 +38,13 @@ push_release_branch_and_tag() {
 publish() {
   dist_tag="$1"
 
-  log "Publishing @openzeppelin/contracts on npm"
+  log "Publishing openzeppelin/contracts on npm"
   cd contracts
   npm publish --tag "$dist_tag" --otp "$(prompt_otp)"
   cd ..
 
   if [[ "$dist_tag" == "latest" ]]; then
-    npm dist-tag rm --otp "$(prompt_otp)" @openzeppelin/contracts next
+    npm dist-tag rm --otp "$(prompt_otp)" openzeppelin/contracts next
   fi
 }
 

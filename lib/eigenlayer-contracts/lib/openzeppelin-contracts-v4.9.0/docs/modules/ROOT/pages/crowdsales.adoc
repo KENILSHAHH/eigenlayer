@@ -5,7 +5,7 @@ All crowdsale-related contracts were removed from the OpenZeppelin Contracts lib
 They are however still available on the v2.5 release of OpenZeppelin Contracts, which you can install by running:
 
 ```console
-$ npm install @openzeppelin/contracts@v2.5
+$ npm install openzeppelin/contracts@v2.5
 ```
 
 Refer to the https://docs.openzeppelin.com/contracts/2.x/crowdsales[v2.x documentation] when working with them.

@@ -1,6 +1,6 @@
 # <img src="logo.svg" alt="OpenZeppelin" height="40px">
 
-[![NPM Package](https://img.shields.io/npm/v/@openzeppelin/contracts.svg)](https://www.npmjs.org/package/@openzeppelin/contracts)
+[![NPM Package](https://img.shields.io/npm/v/openzeppelin/contracts.svg)](https://www.npmjs.org/package/openzeppelin/contracts)
 [![Coverage Status](https://codecov.io/gh/OpenZeppelin/openzeppelin-contracts/graph/badge.svg)](https://codecov.io/gh/OpenZeppelin/openzeppelin-contracts)
 [![GitPOAPs](https://public-api.gitpoap.io/v1/repo/OpenZeppelin/openzeppelin-contracts/badge)](https://www.gitpoap.io/gh/OpenZeppelin/openzeppelin-contracts)
 [![Docs](https://img.shields.io/badge/docs-%F0%9F%93%84-yellow)](https://docs.openzeppelin.com/contracts)
@@ -24,7 +24,7 @@
 ### Installation
 
 ```
-$ npm install @openzeppelin/contracts-upgradeable
+$ npm install openzeppelin/contracts-upgradeable
 ```
 
 OpenZeppelin Contracts features a [stable API](https://docs.openzeppelin.com/contracts/releases-stability#api-stability), which means that your contracts won't break unexpectedly when upgrading to a newer minor version.
@@ -38,7 +38,7 @@ Once installed, you can use the contracts in the library by importing them:
 ```solidity
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
+import "openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
 
 contract MyCollectible is ERC721Upgradeable {
     function initialize() initializer public {

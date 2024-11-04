@@ -46,9 +46,9 @@ The voting power of each account in our governance setup will be determined by a
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.2;
 
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Permit.sol";
-import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol";
+import "openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "openzeppelin/contracts/token/ERC20/extensions/ERC20Permit.sol";
+import "openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol";
 
 contract MyToken is ERC20, ERC20Permit, ERC20Votes {
     constructor() ERC20("MyToken", "MTK") ERC20Permit("MyToken") {}
@@ -84,10 +84,10 @@ If your project already has a live token that does not include ERC20Votes and is
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.2;
 
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Permit.sol";
-import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol";
-import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Wrapper.sol";
+import "openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "openzeppelin/contracts/token/ERC20/extensions/ERC20Permit.sol";
+import "openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol";
+import "openzeppelin/contracts/token/ERC20/extensions/ERC20Wrapper.sol";
 
 contract MyToken is ERC20, ERC20Permit, ERC20Votes, ERC20Wrapper {
     constructor(IERC20 wrappedToken)
@@ -149,11 +149,11 @@ We can optionally set a proposal threshold as well. This restricts proposal crea
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.2;
 
-import "@openzeppelin/contracts/governance/Governor.sol";
-import "@openzeppelin/contracts/governance/compatibility/GovernorCompatibilityBravo.sol";
-import "@openzeppelin/contracts/governance/extensions/GovernorVotes.sol";
-import "@openzeppelin/contracts/governance/extensions/GovernorVotesQuorumFraction.sol";
-import "@openzeppelin/contracts/governance/extensions/GovernorTimelockControl.sol";
+import "openzeppelin/contracts/governance/Governor.sol";
+import "openzeppelin/contracts/governance/compatibility/GovernorCompatibilityBravo.sol";
+import "openzeppelin/contracts/governance/extensions/GovernorVotes.sol";
+import "openzeppelin/contracts/governance/extensions/GovernorVotesQuorumFraction.sol";
+import "openzeppelin/contracts/governance/extensions/GovernorTimelockControl.sol";
 
 contract MyGovernor is Governor, GovernorCompatibilityBravo, GovernorVotes, GovernorVotesQuorumFraction, GovernorTimelockControl {
     constructor(IVotes _token, TimelockController _timelock)
@@ -391,11 +391,11 @@ The Governor will automatically detect the clock mode used by the token and adap
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.2;
 
-import "@openzeppelin/contracts/governance/Governor.sol";
-import "@openzeppelin/contracts/governance/compatibility/GovernorCompatibilityBravo.sol";
-import "@openzeppelin/contracts/governance/extensions/GovernorVotes.sol";
-import "@openzeppelin/contracts/governance/extensions/GovernorVotesQuorumFraction.sol";
-import "@openzeppelin/contracts/governance/extensions/GovernorTimelockControl.sol";
+import "openzeppelin/contracts/governance/Governor.sol";
+import "openzeppelin/contracts/governance/compatibility/GovernorCompatibilityBravo.sol";
+import "openzeppelin/contracts/governance/extensions/GovernorVotes.sol";
+import "openzeppelin/contracts/governance/extensions/GovernorVotesQuorumFraction.sol";
+import "openzeppelin/contracts/governance/extensions/GovernorTimelockControl.sol";
 
 contract MyGovernor is Governor, GovernorCompatibilityBravo, GovernorVotes, GovernorVotesQuorumFraction, GovernorTimelockControl {
     constructor(IVotes _token, TimelockController _timelock)

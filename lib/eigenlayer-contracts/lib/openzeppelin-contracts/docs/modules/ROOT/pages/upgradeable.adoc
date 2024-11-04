@@ -2,7 +2,7 @@
 
 If your contract is going to be deployed with upgradeability, such as using the xref:upgrades-plugins::index.adoc[OpenZeppelin Upgrades Plugins], you will need to use the Upgradeable variant of OpenZeppelin Contracts.
 
-This variant is available as a separate package called `@openzeppelin/contracts-upgradeable`, which is hosted in the repository https://github.com/OpenZeppelin/openzeppelin-contracts-upgradeable[OpenZeppelin/openzeppelin-contracts-upgradeable].
+This variant is available as a separate package called `openzeppelin/contracts-upgradeable`, which is hosted in the repository https://github.com/OpenZeppelin/openzeppelin-contracts-upgradeable[OpenZeppelin/openzeppelin-contracts-upgradeable].
 
 It follows all of the rules for xref:upgrades-plugins::writing-upgradeable.adoc[Writing Upgradeable Contracts]: constructors are replaced by initializer functions, state variables are initialized in initializer functions, and we additionally check for storage incompatibilities across minor versions.
 
@@ -13,7 +13,7 @@ TIP: OpenZeppelin provides a full suite of tools for deploying and securing upgr
 === Installation
 
 ```console
-$ npm install @openzeppelin/contracts-upgradeable
+$ npm install openzeppelin/contracts-upgradeable
 ```
 
 === Usage
@@ -21,8 +21,8 @@ $ npm install @openzeppelin/contracts-upgradeable
 The package replicates the structure of the main OpenZeppelin Contracts package, but every file and contract has the suffix `Upgradeable`.
 
 ```diff
--import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-+import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
+-import "openzeppelin/contracts/token/ERC721/ERC721.sol";
++import "openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
  
 -contract MyCollectible is ERC721 {
 +contract MyCollectible is ERC721Upgradeable {

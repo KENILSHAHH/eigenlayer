@@ -74,8 +74,8 @@ index 9fc95518..53130e3c 100644
  ### Installation
  
  ```
--$ npm install @openzeppelin/contracts
-+$ npm install @openzeppelin/contracts-upgradeable
+-$ npm install openzeppelin/contracts
++$ npm install openzeppelin/contracts-upgradeable
  ```
  
  OpenZeppelin Contracts features a [stable API](https://docs.openzeppelin.com/contracts/releases-stability#api-stability), which means that your contracts won't break unexpectedly when upgrading to a newer minor version.
@@ -89,8 +89,8 @@ index 9fc95518..53130e3c 100644
  ```solidity
  pragma solidity ^0.8.0;
  
--import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-+import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
+-import "openzeppelin/contracts/token/ERC721/ERC721.sol";
++import "openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
  
 -contract MyCollectible is ERC721 {
 -    constructor() ERC721("MyCollectible", "MCO") {
@@ -190,8 +190,8 @@ index 55e70b17..ceefb984 100644
 +++ b/contracts/package.json
 @@ -1,5 +1,5 @@
  {
--  "name": "@openzeppelin/contracts",
-+  "name": "@openzeppelin/contracts-upgradeable",
+-  "name": "openzeppelin/contracts",
++  "name": "openzeppelin/contracts-upgradeable",
    "description": "Secure Smart Contract library for Solidity",
    "version": "4.8.2",
    "files": [

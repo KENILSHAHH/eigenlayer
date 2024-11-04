@@ -1,9 +1,9 @@
 # <img src="icon.svg" alt="OpenZeppelin" height="40px" align="left"> OpenZeppelin Contracts Upgradeable
 
 [![Docs](https://img.shields.io/badge/docs-%F0%9F%93%84-blue)](https://docs.openzeppelin.com/contracts/upgradeable)
-[![NPM Package](https://img.shields.io/npm/v/@openzeppelin/contracts-upgradeable.svg)](https://www.npmjs.org/package/@openzeppelin/contracts-upgradeable)
+[![NPM Package](https://img.shields.io/npm/v/openzeppelin/contracts-upgradeable.svg)](https://www.npmjs.org/package/openzeppelin/contracts-upgradeable)
 
-This repository hosts the Upgradeable variant of [OpenZeppelin Contracts], meant for use in upgradeable contracts. This variant is available as separate package called `@openzeppelin/contracts-upgradeable`.
+This repository hosts the Upgradeable variant of [OpenZeppelin Contracts], meant for use in upgradeable contracts. This variant is available as separate package called `openzeppelin/contracts-upgradeable`.
 
 [OpenZeppelin Contracts]: https://github.com/OpenZeppelin/openzeppelin-contracts
 
@@ -15,7 +15,7 @@ It follows all of the rules for [Writing Upgradeable Contracts]: constructors ar
 >
 > There will be storage incompatibilities across major versions of this package, which makes it unsafe to upgrade a deployed contract from one major version to another, for example from 3.4.0 to 4.0.0.
 > 
-> Similarly, it is not safe to upgrade from `@openzeppelin/contracts-ethereum-package` (a similar previous package) to `@openzeppelin/contracts-upgradeable`.
+> Similarly, it is not safe to upgrade from `openzeppelin/contracts-ethereum-package` (a similar previous package) to `openzeppelin/contracts-upgradeable`.
 >
 > **It is strongly encouraged to use these contracts together with a tool that can automatically guarantee the safety of an upgradeable contract, such as the [OpenZeppelin Upgrades Plugins](https://github.com/OpenZeppelin/openzeppelin-upgrades).**
 
@@ -26,7 +26,7 @@ It follows all of the rules for [Writing Upgradeable Contracts]: constructors ar
 ### Installation
 
 ```console
-$ npm install @openzeppelin/contracts-upgradeable
+$ npm install openzeppelin/contracts-upgradeable
 ```
 
 OpenZeppelin Contracts features a [stable API](https://docs.openzeppelin.com/contracts/releases-stability#api-stability), which means your contracts won't break unexpectedly when upgrading to a newer minor version.
@@ -38,8 +38,8 @@ An alternative to npm is to use the GitHub repository `openzeppelin/openzeppelin
 The package replicates the structure of the main OpenZeppelin Contracts package, but every file and contract has the suffix `Upgradeable`.
 
 ```diff
--import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-+import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
+-import "openzeppelin/contracts/token/ERC721/ERC721.sol";
++import "openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
  
 -contract MyCollectible is ERC721 {
 +contract MyCollectible is ERC721Upgradeable {

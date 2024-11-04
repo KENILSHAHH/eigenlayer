@@ -17,7 +17,7 @@ examples_dir="docs/modules/api/examples"
 mkdir -p "$examples_dir"
 for f in contracts/mocks/docs/*.sol; do
   name="$(basename "$f")"
-  sed -e '/^import/s|\.\./\.\./|@openzeppelin/contracts/|' "$f" > "docs/modules/api/examples/$name"
+  sed -e '/^import/s|\.\./\.\./|openzeppelin/contracts/|' "$f" > "docs/modules/api/examples/$name"
 done
 
 node scripts/gen-nav.js "$OUTDIR" > "$OUTDIR/../nav.adoc"
