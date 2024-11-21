@@ -1,7 +1,7 @@
 [core-docs-dev]: https://github.com/Layr-Labs/eigenlayer-contracts/tree/dev/docs
 [core-repo]: https://github.com/Layr-Labs/eigenlayer-contracts
 
-# EigenLayer Middleware
+# npm package for eigenlayer contracts
 
 EigenLayer is a set of smart contracts deployed on Ethereum that enable restaking of assets to secure new services called AVSs (actively validated services). The core contracts that enable these features can be found in the [`eigenlayer-contracts` repo][core-repo].
 
